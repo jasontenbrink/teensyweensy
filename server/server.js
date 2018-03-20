@@ -10,14 +10,16 @@ const passport = require('./strategies');
 const userRegistration = require('./routes/userRegistration');
 const index = require('./routes/index.js');
 const login = require('./routes/login.js');
-const createUrl = require('./routes/createUrl');
-const urls = require('./modules/urls');
+const urlsRoute = require('./routes/createUrl');
+const urlsService = require('./modules/urls');
 const tinyUrlsRedirect = require('./routes/tinyUrlsRedirect');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 pgQuery.connectionParameters = 'postgres://localhost:5432/teensyWeensy'; //local
+
+urlsService.loadURLsFromDB();
 
 //express Session Configuration
 app.use(session({
@@ -46,36 +48,13 @@ app.use( (req, res, next) => {
   next();
 });
 
-
-
-app.get('/:test', (req, res)=>{
-  console.log('test', req.params.test)
-  console.log('3rd urls', urls.getUrls())
-  res.json({message: "hi mom"})
-})
-
-
-
-
-// app.get('/test2:url', (req, res)=>{
-//   urls.map( urlx => {
-//     if (url == urlx) res.pipe(urlx.longUrl)
-//   })
-// })
-
 app.use('/login', login);
 app.use('/register', userRegistration)
-app.use('/create-url', authenticate, createUrl)
-
+app.use('/urls', authenticate, urlsRoute)
 app.use('/a', tinyUrlsRedirect);
-urls.addUrl('xcs');
-
 app.use('/', index);
 
-
-
 app.set('port', process.env.PORT || 3000);
-
 
 app.listen(app.get('port'), () => {
   util.log(' listening on port ', app.get('port'));

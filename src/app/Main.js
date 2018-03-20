@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import {Route, Link, withRouter} from 'react-router-dom'
 import TextField from 'material-ui/TextField'
 import GridList from 'material-ui/GridList'
@@ -27,26 +28,25 @@ const styles = {
     }
 };
 
-const data = [
-    {
-        tinyUrl: "www.tinytest.com",
-        longUrl: "www.longtest.com",
-        count: 213
-    }
-]
-
 export default class Main extends React.Component{
     state = {
-        longUrlInput: ""
+        longUrlInput: "",
+        urls: []
     };
 
-
     componentDidMount(){
-
+        axios.get('/urls')
+        .then(res => this.setState({urls: res.data}))
+        .catch(err => console.log(err)) 
     }
 
     handleFieldChange = (inputName, e) => {
         this.setState({[inputName]: e.target.value})
+    }
+
+    submit = () => {
+        axios.post('/urls', {longURL: this.state.longUrlInput})
+        .then(res => this.setState({urls: [...this.state.urls, res.data]}))
     }
 
     render() {
@@ -82,17 +82,18 @@ export default class Main extends React.Component{
                         displayRowCheckbox={false}
                         showRowHover={false}
                     >
-                        {data.map((value, index) => {
+                        {this.state.urls.map((value, index) => {
+                            console.log("table row values", value)
                             return (
                                 <TableRow key={index}>
                                     <TableRowColumn style={{textAlign: "center"}}>
-                                        <a href="www.google.com">google</a>
+                                        <a href={`a/${value.tiny_url}`}>{value.tiny_url}</a>
                                     </TableRowColumn>
                                     <TableRowColumn style={{textAlign: "center"}}>
-                                        hardcoded
+                                        {value.long_url}
                                     </TableRowColumn>
                                     <TableRowColumn style={{textAlign: "center"}}>
-                                        4
+                                        {value.count}
                                     </TableRowColumn>
                                 </TableRow>
                             )

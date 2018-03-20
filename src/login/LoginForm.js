@@ -9,23 +9,22 @@ import ErrorBanner from './errorBanner.js'
 import Loading from './Loading.js'
 
 export default class LoginForm extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      username: "jason.tenbrink@gmail.com",
-      password: "JasJen23",
+  
+    state = {
+      username: "a",
+      password: "a",
       authenticationError: false,
       isSubmitting: false
     }
-    this.handleFieldChange = this.handleFieldChange.bind(this);
-    this.submit = this.submit.bind(this);
-  }
+    // this.handleFieldChange = this.handleFieldChange.bind(this);
+    // this.submit = this.submit.bind(this);
+  
 
-  handleFieldChange(inputName, e){
+  handleFieldChange = (inputName, e) => {
     this.setState({[inputName]: e.target.value})
   }
 
-  submit({ username, password }) {
+  submit = ({ username, password }) => {
     this.setState({ authenticationError: false })
     this.setState({ isSubmitting: true })
     let data = { username, password }
@@ -52,7 +51,7 @@ export default class LoginForm extends Component {
             <ErrorBanner showError={this.state.authenticationError}/>
             <form style={styles.mainBox} action="/" method="post">
               <input style={styles.input}
-                placeholder = "user name"
+                placeholder = "username"
                 type="text"
                 name="username" 
                 value={this.state.username} 

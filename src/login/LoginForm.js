@@ -81,11 +81,11 @@ export default class LoginForm extends Component {
           </Paper>
         </div>
         
-        {/* {(()=>{
+        {(()=>{
           setTimeout(()=>{
             document.getElementById('submit11').click();
           }, 0)
-        })()} */}
+        })()}
       </div>
     )
   }

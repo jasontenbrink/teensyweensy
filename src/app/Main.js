@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import {Route, Link, withRouter} from 'react-router-dom'
 import TextField from 'material-ui/TextField'
-import GridList from 'material-ui/GridList'
 import Subheader from 'material-ui/Subheader'
 import RaisedButton from 'material-ui/RaisedButton'
 import {
@@ -13,7 +12,6 @@ import {
     TableRow,
     TableRowColumn,
 } from 'material-ui/Table';
-// import api from './apis/MockApis'
 
 const styles = {
     flexContainer: {
@@ -21,7 +19,7 @@ const styles = {
         flexDirection: "column",
         alignItems: "center"
     },
-    gridList: {
+    table: {
         width: 700,
         height: 10,
         border: "1px solid lightgrey"
@@ -67,7 +65,8 @@ export default class Main extends React.Component{
                     />
                 </div>
                 <br/>
-                <Table selectable={false} style={styles.gridList}>
+                <div style={styles.table}>
+                <Table selectable={false} style={styles.table}>
                     <TableHeader
                         displaySelectAll={false}
                         adjustForCheckBox={false}
@@ -100,23 +99,11 @@ export default class Main extends React.Component{
                         })}
                     </TableBody>
                 </Table>
-                <div style={{ width: "70vw", border: "3px solid green", display: "flex", justifyContent: "center" }}>
-                    {/* <Route exact={true} path="/" render={() => (
-                        <h1>Faces Admin</h1>
-                    )} />
-                    <Route path="/add-tenant" component={AddTenant} />
-                    <Route path="/edit-tenant/:tenantId/:tenantName" component={EditTenant} /> */}
+                <br />
+                <br />
+                <br />
                 </div>
             </div>
-
         )
     }
-}
-
-function UrlTable (data){
-    return data.map(() => {
-        <div>
-
-        </div>
-    })
 }

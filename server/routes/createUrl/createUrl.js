@@ -13,6 +13,7 @@ router.route('/')
     urls.forEach(({url_id}) => {
         newTinyURL > url_id ? null : newTinyURL = url_id;
     })
+    newTinyURL++
     try {
         response = await dbQueries.addUrl(newTinyURL, req.body.longURL)
     }

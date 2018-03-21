@@ -3,10 +3,12 @@ To run locally execute the command
 npm run local
 
 You will also need to create a .env file with two values:
-SECRET=1234
-DATABASE_URL
 
-the SECRET can be whatever you want, the DATABASE_URL should be the url to whatever database you wish to use.  For your reference I've incuded the scripts to database I created.
+SECRET=whatEverYouWant1234
+
+DATABASE_URL=urlToYourDatabase
+
+the SECRET can be whatever you want, the DATABASE_URL should be the url to whatever database you wish to use.  For your reference I've incuded the scripts I used to create my local database.
 
 CREATE TABLE urls
 (

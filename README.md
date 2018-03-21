@@ -2,7 +2,7 @@ To run locally execute the command
 
 npm run local
 
-You will also need to create a .env file with two values:
+You will also need to create a .env file at the root of your poject with two values:
 
 SECRET=whatEverYouWant1234
 

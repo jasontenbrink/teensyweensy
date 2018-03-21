@@ -87,7 +87,9 @@ export default class Main extends React.Component{
                             return (
                                 <TableRow key={index}>
                                     <TableRowColumn style={{textAlign: "center"}}>
-                                        <a href={`a/${value.tiny_url}`}>{value.tiny_url}</a>
+                                        <a href={`a/${value.tiny_url}`}>
+                                            {`teensy-weensy.herokuapp.com/a/${value.tiny_url}`}
+                                        </a>
                                     </TableRowColumn>
                                     <TableRowColumn style={{textAlign: "center"}}>
                                         {value.long_url}

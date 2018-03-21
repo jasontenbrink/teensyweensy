@@ -8,12 +8,13 @@ router.route('/')
     let response;
     const urls = urlsService.getUrls();
 
-    //TODO insure new tiny url will be unique
-
     //could probably do this part on the DB
-    const newTinyURI = urls[urls.length-1].url_id+1;
+    let newTinyURL = 0;
+    urls.forEach(({url_id}) => {
+        newTinyURL > url_id ? null : newTinyURL = url_id;
+    })
     try {
-        response = await dbQueries.addUrl(newTinyURI, req.body.longURL)
+        response = await dbQueries.addUrl(newTinyURL, req.body.longURL)
     }
     catch(e){
         console.log(e)

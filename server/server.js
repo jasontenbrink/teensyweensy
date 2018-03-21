@@ -17,7 +17,7 @@ const tinyUrlsRedirect = require('./routes/tinyUrlsRedirect');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-pgQuery.connectionParameters = 'postgres://localhost:5432/teensyWeensy'; //local
+pgQuery.connectionParameters = process.env.DATABASE_URL; //heroku
 
 urlsService.loadURLsFromDB();
 
@@ -51,6 +51,7 @@ app.use( (req, res, next) => {
 app.use('/login', login);
 app.use('/register', userRegistration)
 app.use('/urls', authenticate, urlsRoute)
+// app.use('/urls', urlsRoute)
 app.use('/a', tinyUrlsRedirect);
 app.use('/', index);
 

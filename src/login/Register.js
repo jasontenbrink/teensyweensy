@@ -47,7 +47,7 @@ export default class Register extends Component {
             <ErrorBanner showError={this.state.authenticationError}/>
             
               <input style={styles.input}
-                placeholder = "user name"
+                placeholder = "username"
                 type="text"
                 name="username" 
                 value={this.state.username} 
@@ -73,12 +73,6 @@ export default class Register extends Component {
               />
           </Paper>
         </div>
-        
-        {/* {(()=>{
-          setTimeout(()=>{
-            document.getElementById('submit11').click();
-          }, 0)
-        })()} */}
       </div>
     )
   }

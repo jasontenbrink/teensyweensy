@@ -6,7 +6,7 @@ module.exports = function(req, username, password, done) {
     function (err, rows) {
       if (err) return err;
       if (rows === undefined || rows[0] == undefined){
-        return done(null, false, {message: 'no email found'});
+        return done(null, false, {message: 'no username found'});
       }
       const dbPassword = rows[0].password;
       bcrypt.compare(req.body.password, dbPassword, function (err, isMatch) {
@@ -14,7 +14,6 @@ module.exports = function(req, username, password, done) {
 
           const objectSentToSerializer = {
               username: req.body.username,
-              randomFunMessage: 'chickenButt',
               pin: rows[0].pin
           };
 

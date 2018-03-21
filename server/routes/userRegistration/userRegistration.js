@@ -24,18 +24,3 @@ router.post('/', function(req,res,next){
 });
 
 module.exports = router;
-
-
-// .then(function(salt){
-//   return bcrypt.hashAsync(user.password, salt);
-// })
-// .then(function(hash){
-//    user.password = hash;
-//       pgQuery('insert into people (email, password, first_name, last_name) VALUES ($1, $2, $3, $4)',
-//             [user.username, user.password, user.firstName, user.lastName],
-//             function (err, rows) {
-//               if (err) console.log(err);
-//               res.redirect('/');  //this redirect should probably go away
-//               // probably just send a 200 status or something
-//       });
-//   });

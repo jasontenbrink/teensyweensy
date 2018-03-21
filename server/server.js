@@ -17,14 +17,15 @@ const tinyUrlsRedirect = require('./routes/tinyUrlsRedirect');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-pgQuery.connectionParameters = process.env.DATABASE_URL; //heroku
+// pgQuery.connectionParameters = process.env.DATABASE_URL; //heroku
+pgQuery.connectionParameters = 'postgres://localhost:5432/teensyWeensy'; //local
 
 urlsService.loadURLsFromDB();
 
 //express Session Configuration
 app.use(session({
    secret: process.env.SECRET,
-   key: 'user', //this is the name of the key that will be attached to req.session or maybe req.user, can't remember
+   key: 'user', 
    resave: 'true',
    saveUninitialized: false,
    cookie: {maxage: 600000, secure: false}

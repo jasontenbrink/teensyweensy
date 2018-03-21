@@ -16,9 +16,6 @@ export default class LoginForm extends Component {
       authenticationError: false,
       isSubmitting: false
     }
-    // this.handleFieldChange = this.handleFieldChange.bind(this);
-    // this.submit = this.submit.bind(this);
-  
 
   handleFieldChange = (inputName, e) => {
     this.setState({[inputName]: e.target.value})
@@ -49,7 +46,7 @@ export default class LoginForm extends Component {
               <h1 style={styles.welcome}>Teensy Weensy Login</h1>
             </div>
             <ErrorBanner showError={this.state.authenticationError}/>
-            <form style={styles.mainBox} action="/" method="post">
+            <div style={styles.mainBox} >
               <input style={styles.input}
                 placeholder = "username"
                 type="text"
@@ -75,7 +72,7 @@ export default class LoginForm extends Component {
                 buttonStyle={styles.submitButton}
                 label="Log In"
               />
-          </form>
+          </div>
           <p style={{textAlign: "center"}}>--or--</p>
           <Link to="/register">Register for a new account</Link>
           </Paper>

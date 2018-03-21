@@ -72,7 +72,9 @@ export default class Main extends React.Component{
                         adjustForCheckBox={false}
                         enableSelectAll={false}>
                         <TableRow>
-                            <TableHeaderColumn style={{paddingLeft: "12px"}}>Tiny Url</TableHeaderColumn>
+                            <TableHeaderColumn style={{paddingLeft: "12px"}}>
+                                Tiny Url
+                            </TableHeaderColumn>
                             <TableHeaderColumn>Long Url</TableHeaderColumn>
                             <TableHeaderColumn>Number of Hits</TableHeaderColumn>
                         </TableRow>
@@ -82,7 +84,6 @@ export default class Main extends React.Component{
                         showRowHover={false}
                     >
                         {this.state.urls.map((value, index) => {
-                            console.log("table row values", value)
                             return (
                                 <TableRow key={index}>
                                     <TableRowColumn style={{textAlign: "center"}}>

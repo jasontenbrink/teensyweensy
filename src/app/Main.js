@@ -20,7 +20,7 @@ const styles = {
         alignItems: "center"
     },
     table: {
-        width: 700,
+        width: 900,
         height: 10,
         border: "1px solid lightgrey"
     }

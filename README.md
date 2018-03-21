@@ -10,6 +10,10 @@ DATABASE_URL=urlToYourDatabase
 
 the SECRET can be whatever you want, the DATABASE_URL should be the url to whatever database you wish to use.  For your reference I've incuded the scripts I used to create my local database.
 
+A working version of the app can be found at
+
+http://teensy-weensy.herokuapp.com/
+
 CREATE TABLE urls
 (
   url_id serial NOT NULL,

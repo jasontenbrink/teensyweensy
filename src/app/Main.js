@@ -53,7 +53,10 @@ export default class Main extends React.Component{
         console.log('submit button')
         if(validateURL(this.state.longUrlInput)){
             axios.post('/urls', {longURL: this.state.longUrlInput})
-            .then(res => this.setState({urls: [...this.state.urls, res.data]}))
+            .then(res => this.setState({
+                urls: [...this.state.urls, res.data],
+                longUrlInput: ""
+            }))
         }
     }
 

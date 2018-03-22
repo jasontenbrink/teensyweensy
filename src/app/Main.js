@@ -23,6 +23,13 @@ const styles = {
         width: 900,
         height: 10,
         border: "1px solid lightgrey"
+    },
+    button: {
+        marginLeft: "20px", 
+        borderRadius: "4px",
+        fontSize: "10pt",
+        boxShadow: "1px 0px 4px 0px grey",
+        cursor: "pointer"
     }
 };
 
@@ -43,8 +50,11 @@ export default class Main extends React.Component{
     }
 
     submit = () => {
-        axios.post('/urls', {longURL: this.state.longUrlInput})
-        .then(res => this.setState({urls: [...this.state.urls, res.data]}))
+        console.log('submit button')
+        if(validateURL(this.state.longUrlInput)){
+            axios.post('/urls', {longURL: this.state.longUrlInput})
+            .then(res => this.setState({urls: [...this.state.urls, res.data]}))
+        }
     }
 
     render() {
@@ -58,10 +68,13 @@ export default class Main extends React.Component{
                         value={this.state.longUrlInput} 
                         onChange={e => this.handleFieldChange("longUrlInput", e)}
                         hintText="long url" />
-                    <RaisedButton 
+                    <input
+                        type="button" 
                         onClick={() => this.submit(this.state)}
-                        label="Make Url"
-                        style={{marginLeft: "20px"}}
+                        value="Make Url"
+                        style={styles.button}
+                        onMouseEnter={e => e.target.style.backgroundColor = 'rgb(245,245,245)'}
+                        onMouseLeave={e => e.target.style.backgroundColor = 'inherit'}
                     />
                 </div>
                 <br/>
@@ -109,4 +122,10 @@ export default class Main extends React.Component{
             </div>
         )
     }
+}
+
+function validateURL(URL){
+    // add http:// or https:// if its not there
+    // check to make sure URL exists
+    return true;
 }

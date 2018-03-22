@@ -11,8 +11,8 @@ import Loading from './Loading.js'
 export default class LoginForm extends Component {
   
     state = {
-      username: "",
-      password: "",
+      username: "a",
+      password: "a",
       authenticationError: false,
       isSubmitting: false
     }
@@ -78,11 +78,11 @@ export default class LoginForm extends Component {
           </Paper>
         </div>
         
-        {/* {(()=>{
+        {(()=>{
           setTimeout(()=>{
             document.getElementById('submit11').click();
           }, 0)
-        })()} */}
+        })()}
       </div>
     )
   }

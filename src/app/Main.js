@@ -36,26 +36,42 @@ const styles = {
 export default class Main extends React.Component{
     state = {
         longUrlInput: "",
+        tinyUrlInput: "",
+        submitURLError: "",
         urls: []
     };
 
     componentDidMount(){
         axios.get('/urls')
-        .then(res => this.setState({urls: res.data}))
+        .then(res => {
+            res.data.sort( (a,b) => {
+                if (a.url_id < b.url_id) return -1;
+                if (a.url_id > b.url_id) return 1;
+                return 0;
+            });
+            this.setState({urls: res.data})
+        })
         .catch(err => console.log(err)) 
     }
 
     handleFieldChange = (inputName, e) => {
-        this.setState({[inputName]: e.target.value})
+        this.setState({[inputName]: e.target.value, submitURLError: ""})
     }
 
     submit = () => {
-        console.log('submit button')
+        //validate Tiny url is unique
+        if ( this.state.urls.find( ({tiny_url}) => tiny_url == this.state.tinyUrlInput) ) {
+            this.setState({submitURLError: 'This tiny url is already being used'})
+            console.log('this url is being used')
+            return 0;
+        }
+
         if(validateURL(this.state.longUrlInput)){
-            axios.post('/urls', {longURL: this.state.longUrlInput})
+            axios.post('/urls', {longURL: this.state.longUrlInput, tinyURL: this.state.tinyUrlInput})
             .then(res => this.setState({
                 urls: [...this.state.urls, res.data],
-                longUrlInput: ""
+                longUrlInput: "",
+                tinyUrlInput: ""
             }))
         }
     }
@@ -64,13 +80,24 @@ export default class Main extends React.Component{
         return (
             <div style={styles.flexContainer}>
                 <h1>Teensy Weensy tiny url generator</h1>
-                <p>enter the longform url you wish to see converted into a tiny url</p>
+                <p style={{width: '50%', textAlign: 'center'}}>
+                    Enter the longform url you wish to see converted into a tiny url.  
+                    You may optionally enter a custom tiny url.  If left blank a default will be used.
+                </p>
                 <div style={{display: 'flex', flexDirection:'row'}}>
                     <TextField 
                         name="longUrlInput" 
                         value={this.state.longUrlInput} 
+                        style={{marginRight: '5px'}}
                         onChange={e => this.handleFieldChange("longUrlInput", e)}
                         hintText="long url" />
+
+                     <TextField 
+                        name="tinyUrlInput" 
+                        value={this.state.tinyUrlInput} 
+                        onChange={e => this.handleFieldChange("tinyUrlInput", e)}
+                        hintText="desired tiny url" />
+
                     <input
                         type="button" 
                         onClick={() => this.submit(this.state)}
@@ -80,6 +107,9 @@ export default class Main extends React.Component{
                         onMouseLeave={e => e.target.style.backgroundColor = 'inherit'}
                     />
                 </div>
+                {this.state.submitURLError ? (
+                    <div style={{color: 'red'}}>{this.state.submitURLError}</div> )
+                : null}
                 <br/>
                 <div style={styles.table}>
                 <Table selectable={false} style={styles.table}>

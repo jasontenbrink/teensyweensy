@@ -17,8 +17,8 @@ const tinyUrlsRedirect = require('./routes/tinyUrlsRedirect');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-// pgQuery.connectionParameters = process.env.DATABASE_URL; //heroku
-pgQuery.connectionParameters = 'postgres://localhost:5432/teensyWeensy'; //local
+pgQuery.connectionParameters = process.env.DATABASE_URL; //heroku
+// pgQuery.connectionParameters = 'postgres://localhost:5432/teensyWeensy'; //local
 
 urlsService.loadURLsFromDB();
 
